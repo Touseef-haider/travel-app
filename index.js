@@ -17,34 +17,27 @@ app.use(helmet());
 app.use(morgan("dev"));
 app.use(cors());
 
-app.get("/", (req, res) => {
-    res.render("welcome", {
-        environment: process.env.NODE_ENV,
-        url: req.get("host") + "/api/something",
-    });
+app.use((req, res, next) => {
+  req.header("Access-Control-Allow-Origin", "*");
+  req.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
 });
 
 app.use("/api", routes);
 
-app.use((req, res, next) => {
-    req.header("Access-Control-Allow-Origin", "*");
-    req.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept"
-    );
-    next();
-});
-
 // eslint-disable-next-line
 app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    return res.json({
-        message: err?.message,
-        status: err.status,
-        error: err,
-    });
+  res.status(err.status || 500);
+  return res.json({
+    message: err?.message,
+    status: err.status,
+    error: err,
+  });
 });
 
 app.listen(config.port, () => {
-    console.log(`Server is running on port ${config.port}`);
+  console.log(`Server is running on port ${config.port}`);
 });

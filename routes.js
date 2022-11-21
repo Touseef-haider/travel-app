@@ -1,10 +1,6 @@
 const Router = require("express").Router();
 
-
-const {
-    logIn,
- 
-} = require("./controllers/user");
+const { logIn } = require("./controllers/user");
 
 Router.post("/login", logIn);
 
