@@ -19,10 +19,6 @@ const userSchema = new Schema(
             type: mongoose.Types.ObjectId,
             ref: "profile",
         },
-        schema_version: {
-            type: Number,
-            default: 0,
-        },
     },
     {
         timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
