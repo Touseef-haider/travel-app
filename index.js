@@ -9,6 +9,7 @@ const routes = require("./routes");
 const config = require("./config");
 const app = express();
 
+// DATABASE
 connect(config.db.test, config.db.options);
 
 app.use(bodyParser.urlencoded({ extended: false }));
