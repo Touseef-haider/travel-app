@@ -16,11 +16,11 @@ const albumSchema = new Schema({
     type: mongoose.Types.ObjectId,
     ref: "profile",
   },
-  album: [
+  images: [
     {
       type: Buffer,
     },
   ],
 });
 
-module.exports = mongoose.model("album", albumSchema);
+module.exports = mongoose.model("experience", albumSchema);

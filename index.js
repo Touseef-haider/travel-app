@@ -13,7 +13,11 @@ const app = express();
 connect(config.db.test, config.db.options);
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(
+  bodyParser.json({
+    limit: "50mb",
+  })
+);
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(cors());
@@ -31,10 +35,10 @@ app.use("/api", routes);
 
 // eslint-disable-next-line
 app.use((err, req, res, next) => {
-  res.status(err.status || 500);
+  console.log(err);
   return res.json({
     message: err?.message,
-    status: err.status,
+    status: err.statusCode,
     error: err,
   });
 });
