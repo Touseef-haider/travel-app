@@ -35,7 +35,6 @@ app.use("/api", routes);
 
 // eslint-disable-next-line
 app.use((err, req, res, next) => {
-  console.log(err);
   return res.json({
     message: err?.message,
     status: err.statusCode,

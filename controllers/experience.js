@@ -15,7 +15,9 @@ exports.addExperience = async (req, res, next) => {
 
 exports.getExperiences = async (req, res, next) => {
   try {
-    const experiences = await Experience.find({}).populate("profile");
+    const experiences = await Experience.find({}).populate("profile").sort({
+      created_at: 1,
+    });
     return res.status(200).json(experiences);
   } catch (error) {
     return next(error);
