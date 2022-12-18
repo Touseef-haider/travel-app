@@ -2,12 +2,16 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const albumSchema = new Schema({
+const experienceSchema = new Schema({
   title: {
     type: String,
   },
   description: {
     type: String,
+  },
+  is_active: {
+    type: Boolean,
+    default: false,
   },
   category: {
     type: String,
@@ -23,4 +27,4 @@ const albumSchema = new Schema({
   ],
 });
 
-module.exports = mongoose.model("experience", albumSchema);
+module.exports = mongoose.model("experience", experienceSchema);
