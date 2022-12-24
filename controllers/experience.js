@@ -2,8 +2,6 @@ const Experience = require("../models/experience");
 
 exports.addExperience = async (req, res, next) => {
   try {
-    console.log(req.files);
-    // console.log(req.body.files);
     const experience = new Experience(req.body);
     experience.profile = req.user?._id;
     await experience.save();
