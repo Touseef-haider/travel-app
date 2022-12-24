@@ -15,9 +15,11 @@ exports.addExperience = async (req, res, next) => {
 
 exports.getExperiences = async (req, res, next) => {
   try {
-    const experiences = await Experience.find({}).populate("profile").sort({
-      created_at: 1,
-    });
+    const experiences = await Experience.find({})
+      .populate(["profile", "comments.by"])
+      .sort({
+        created_at: 1,
+      });
     return res.status(200).json(experiences);
   } catch (error) {
     return next(error);
@@ -30,6 +32,53 @@ exports.getParticularExperience = async (req, res, next) => {
     return res.status(200).json(experience);
   } catch (error) {
     return next(error);
+  }
+};
+
+exports.addCommentInExperience = async (req, res, next) => {
+  try {
+    const { comment } = req.body;
+    await Experience.findByIdAndUpdate(
+      {
+        _id: req.params.id,
+      },
+      {
+        $push: {
+          comments: { message: comment, by: req.user._id },
+        },
+      }
+    );
+
+    return res.status(200).json({ message: "comment added" });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.updateCommentInExperience = async (req, res, next) => {
+  try {
+    const { comment } = req.body;
+
+    const experience = await Experience.findById({ _id: req.params.id });
+    const comments = experience.comments;
+
+    const comm = comments.find(
+      (c) => c?._id?.toString() === req.params.commentId
+    );
+
+    comm.message = comment;
+
+    const filteredComments = comments.filter(
+      (c) => c?._id?.toString() !== req.params.commentId
+    );
+
+    experience.comments = [...filteredComments, comm];
+
+    await experience.save();
+
+    return res.status(200).json({ message: "comment added" });
+  } catch (err) {
+    return next(err);
   }
 };
 
@@ -48,14 +97,33 @@ exports.updateExperience = async (req, res, next) => {
     return next(error);
   }
 };
+
+exports.deleteCommentFromExperience = async (req, res, next) => {
+  try {
+    const experience = await Experience.findById({ _id: req.params.id });
+    const comments = experience.comments;
+
+    const filteredComments = comments.filter(
+      (c) => c?._id?.toString() !== req.params.commentId
+    );
+
+    experience.comments = filteredComments;
+
+    await experience.save();
+
+    return res.status(200).json({
+      message: "comment deleted",
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
+
 exports.deleteExperience = async (req, res, next) => {
   try {
-    await Experience.updateOne(
-      {
-        _id: req.params.id,
-      },
-      req.body
-    );
+    await Experience.deleteOne({
+      _id: req.params.id,
+    });
     return res.status(200).json({
       message: "experience deleted",
     });

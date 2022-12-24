@@ -5,6 +5,9 @@ const {
   getExperiences,
   getParticularExperience,
   updateExperience,
+  addCommentInExperience,
+  updateCommentInExperience,
+  deleteCommentFromExperience,
   deleteExperience,
 } = require("../controllers/experience");
 
@@ -15,6 +18,13 @@ Router.post("/", requireAuth, multiple, addExperience);
 Router.get("/", requireAuth, getExperiences);
 Router.get("/:id", requireAuth, getParticularExperience);
 Router.put("/:id", requireAuth, updateExperience);
+Router.put("/comment/:id", requireAuth, addCommentInExperience);
+Router.put("/comment/:id/:commentId", requireAuth, updateCommentInExperience);
+Router.delete(
+  "/comment/:id/:commentId",
+  requireAuth,
+  deleteCommentFromExperience
+);
 Router.delete("/:id", requireAuth, deleteExperience);
 
 module.exports = Router;

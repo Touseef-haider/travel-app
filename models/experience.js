@@ -26,6 +26,17 @@ const experienceSchema = new Schema(
         type: Buffer,
       },
     ],
+    comments: [
+      {
+        message: {
+          type: String,
+        },
+        by: {
+          type: mongoose.Types.ObjectId,
+          ref: "profile",
+        },
+      },
+    ],
   },
   {
     timestamps: {
