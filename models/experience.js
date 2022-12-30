@@ -35,6 +35,12 @@ const experienceSchema = new Schema(
           type: mongoose.Types.ObjectId,
           ref: "profile",
         },
+        liked_by: [
+          {
+            type: mongoose.Types.ObjectId,
+            ref: "profile",
+          },
+        ],
       },
     ],
   },

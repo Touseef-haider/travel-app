@@ -8,8 +8,6 @@ exports.register = async (req, res, next) => {
   try {
     const { email, password, first_name, last_name } = req.body;
 
-    console.log(req.body);
-
     let hashed;
     if (password) {
       hashed = await hashPassword(password);

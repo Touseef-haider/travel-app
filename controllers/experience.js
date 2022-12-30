@@ -1,3 +1,4 @@
+const { getLikeQuery } = require("../customQueries/experience");
 const Experience = require("../models/experience");
 
 exports.addExperience = async (req, res, next) => {
@@ -75,6 +76,27 @@ exports.updateCommentInExperience = async (req, res, next) => {
     await experience.save();
 
     return res.status(200).json({ message: "comment added" });
+  } catch (err) {
+    return next(err);
+  }
+};
+
+exports.updateLikeInExperience = async (req, res, next) => {
+  try {
+    const experience = await Experience.findById({ _id: req.params.id });
+    const comment = experience.comments.find(
+      (c) => c?._id?.toString() === req.params.commentId
+    );
+    const likedInd = comment.liked_by.indexOf(req.user._id);
+    if (likedInd >= 0) {
+      comment.liked_by.splice(likedInd, 1);
+    } else {
+      comment.liked_by.push(req.user._id);
+    }
+
+    await experience.save();
+
+    return res.status(200).json({ message: "comment liked" });
   } catch (err) {
     return next(err);
   }

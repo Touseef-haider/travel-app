@@ -8,6 +8,7 @@ const {
   addCommentInExperience,
   updateCommentInExperience,
   deleteCommentFromExperience,
+  updateLikeInExperience,
   deleteExperience,
 } = require("../controllers/experience");
 
@@ -20,6 +21,7 @@ Router.get("/:id", requireAuth, getParticularExperience);
 Router.put("/:id", requireAuth, updateExperience);
 Router.put("/comment/:id", requireAuth, addCommentInExperience);
 Router.put("/comment/:id/:commentId", requireAuth, updateCommentInExperience);
+Router.put("/like/:id/:commentId", requireAuth, updateLikeInExperience);
 Router.delete(
   "/comment/:id/:commentId",
   requireAuth,
