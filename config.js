@@ -1,8 +1,8 @@
 module.exports = {
   port: process.env.PORT || 8081,
   db: {
-    // test: "mongodb+srv://admin:admin@cluster0.kkltqgs.mongodb.net/?retryWrites=true&w=majority",
-    test: "mongodb://127.0.0.1:27017/travel",
+    test: "mongodb+srv://admin:admin@cluster0.kkltqgs.mongodb.net/?retryWrites=true&w=majority",
+    // test: "mongodb://127.0.0.1:27017/travel",
     options: {
       useNewUrlParser: true,
       useUnifiedTopology: true,

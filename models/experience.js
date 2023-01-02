@@ -26,6 +26,12 @@ const experienceSchema = new Schema(
         type: Buffer,
       },
     ],
+    liked_by: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "profile",
+      },
+    ],
     comments: [
       {
         message: {

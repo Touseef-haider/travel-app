@@ -101,6 +101,24 @@ exports.updateLikeInExperience = async (req, res, next) => {
     return next(err);
   }
 };
+exports.updateLikeOnPostInExperience = async (req, res, next) => {
+  try {
+    const experience = await Experience.findById({ _id: req.params.id });
+
+    const likedInd = experience.liked_by.indexOf(req.user._id);
+    if (likedInd >= 0) {
+      experience.liked_by.splice(likedInd, 1);
+    } else {
+      experience.liked_by.push(req.user._id);
+    }
+
+    await experience.save();
+
+    return res.status(200).json({ message: "comment liked" });
+  } catch (err) {
+    return next(err);
+  }
+};
 
 exports.updateExperience = async (req, res, next) => {
   try {
