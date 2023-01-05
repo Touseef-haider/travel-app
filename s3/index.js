@@ -1,7 +1,7 @@
 // for handling multipart form data, multer adds file object in req.It is a middleware
-const multer = require('multer');
-const AWS = require('aws-sdk');
-const fs = require('fs');
+const multer = require("multer");
+const AWS = require("aws-sdk");
+const fs = require("fs");
 
 // init aws sdk
 
@@ -9,7 +9,7 @@ const fs = require('fs');
 AWS.config.update({
   accessKeyId: process.env.I_AM_ACCESS_ID,
   secretAccessKey: process.env.I_AM_SECRET,
-  region: 'ap-northeast-1',
+  region: "ap-northeast-1",
 });
 
 // creating an instance of aws s3 bucket
@@ -23,10 +23,10 @@ const storage = multer.diskStorage({
 
 const uploads = multer({
   storage,
-}).array('files');
+}).array("files");
 const upload = multer({
   storage,
-}).single('file');
+}).single("file");
 
 // for single file
 const uploadFilesToS3 = (file, cb) =>
@@ -40,12 +40,12 @@ const uploadFilesToS3 = (file, cb) =>
         Key: `${Date.now()}-${file.filename}`,
         ContentType: file.mimetype,
         Body: filedata,
-        ACL: 'public-read',
+        ACL: "public-read",
       };
       s3.upload(putParams, (s3err, data) => {
         if (s3err) {
           // eslint-disable-next-line
-          console.log('Could not upload the file. Error :', s3err);
+          console.log("Could not upload the file. Error :", s3err);
           cb({
             success: false,
             data,
@@ -53,7 +53,7 @@ const uploadFilesToS3 = (file, cb) =>
           return;
         }
         // eslint-disable-next-line
-        console.log('Successfully uploaded the file');
+        console.log("Successfully uploaded the file");
         cb({
           success: true,
           data,
@@ -79,26 +79,26 @@ const uploadMultipleFilesToS3 = (req, res) => {
             // the name of the subfolder in bucket
             Key: `${Date.now()}-${file.filename}`,
             Body: filedata,
-            ACL: 'public-read',
+            ACL: "public-read",
             contentType: file.mimetype,
           };
           // eslint-disable-next-line
           s3.upload(putParams, (s3err, data) => {
             if (s3err) {
               // eslint-disable-next-line
-              console.log('Could not upload the file. Error :', s3err);
+              console.log("Could not upload the file. Error :", s3err);
               return res.status(403).json({
                 success: false,
                 data,
               });
             }
             // eslint-disable-next-line
-            console.log('Successfully uploaded the file');
+            console.log("Successfully uploaded the file");
             response.push(data);
             if (response.length === req.files.length) {
               return res.status(200).json({
                 error: false,
-                Message: 'File Uploaded SuceesFully',
+                Message: "File Uploaded SuceesFully",
                 Data: response,
               });
             }
@@ -130,7 +130,7 @@ const deleteFromS3 = (req, res) => {
             (resp) =>
               // eslint-disable-next-line
               res.status(200).json({
-                message: 'deleted',
+                message: "deleted",
                 resp,
               })
             // eslint-disable-next-line
@@ -164,7 +164,7 @@ const deleteManyFromS3 = (arrayOfKeys) => {
         return;
       }
       // eslint-disable-next-line
-      console.log('Deleted');
+      console.log("Deleted");
     });
   } catch (error) {
     // eslint-disable-next-line
@@ -176,7 +176,7 @@ const getFilesFromS3 = (req, res, next) => {
   try {
     const params = {
       Bucket: process.env.BUCKET_NAME,
-      Delimiter: '/',
+      Delimiter: "/",
     };
 
     return s3.listObjects(params, (err, data) => {
@@ -192,8 +192,8 @@ const getFilesFromS3 = (req, res, next) => {
 
 const getFileFromS3 = (key) => {
   const downloadParams = {
-      Key: key,
-      Bucket: process.env.CSV_BUCKET_NAME,
+    Key: key,
+    Bucket: process.env.CSV_BUCKET_NAME,
   };
   return s3.getObject(downloadParams).createReadStream();
 };
