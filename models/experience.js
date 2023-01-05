@@ -23,7 +23,7 @@ const experienceSchema = new Schema(
     },
     images: [
       {
-        type: Buffer,
+        type: String,
       },
     ],
     liked_by: [
