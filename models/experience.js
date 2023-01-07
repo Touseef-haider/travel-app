@@ -17,6 +17,10 @@ const experienceSchema = new Schema(
     category: {
       type: String,
     },
+    place: {
+      type: String,
+      required: true,
+    },
     profile: {
       type: mongoose.Types.ObjectId,
       ref: "profile",
