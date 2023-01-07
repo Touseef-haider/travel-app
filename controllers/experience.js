@@ -17,7 +17,7 @@ exports.getExperiences = async (req, res, next) => {
     const experiences = await Experience.find({})
       .populate(["profile", "comments.by"])
       .sort({
-        created_at: 1,
+        created_at: -1,
       });
     return res.status(200).json(experiences);
   } catch (error) {
