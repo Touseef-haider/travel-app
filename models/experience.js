@@ -7,6 +7,11 @@ const experienceSchema = new Schema(
     title: {
       type: String,
     },
+    tags: [
+      {
+        type: String,
+      },
+    ],
     description: {
       type: String,
     },

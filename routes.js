@@ -11,6 +11,7 @@ const { logIn, register, forgotPassword } = require("./controllers/user");
 const userRoutes = require("./appRoutes/user");
 const profileRoutes = require("./appRoutes/profile");
 const experienceRoutes = require("./appRoutes/experience");
+const mapLocationRoutes = require("./appRoutes/mapLocation");
 
 // Auth Routes
 Router.post("/login", logIn);
@@ -21,6 +22,7 @@ Router.post("/register", register);
 Router.use("/users", userRoutes);
 Router.use("/profiles", profileRoutes);
 Router.use("/experience", experienceRoutes);
+Router.use("/mapLocation", mapLocationRoutes);
 
 // for storing single file
 Router.post("/upload", upload, async (req, res, next) => {

@@ -106,7 +106,7 @@ exports.updateLikeOnPostInExperience = async (req, res, next) => {
     const experience = await Experience.findById({ _id: req.params.id });
 
     const likedInd = experience.liked_by.indexOf(req.user._id);
-    if (likedInd >= 0) {
+      if (likedInd >= 0) {
       experience.liked_by.splice(likedInd, 1);
     } else {
       experience.liked_by.push(req.user._id);
