@@ -15,6 +15,19 @@ const mapLocationSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  hotels: [
+    {
+      name: {
+        type: String,
+      },
+      location: {
+        type: String,
+      },
+      image: {
+        type: String,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("mapLocation", mapLocationSchema);
