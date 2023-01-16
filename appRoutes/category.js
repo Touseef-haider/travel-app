@@ -14,6 +14,6 @@ Router.post("/", requireAuth, addCategory);
 Router.get("/", requireAuth, getCategories);
 Router.get("/:id", requireAuth, getParticularCategory);
 Router.put("/:id", requireAuth, updateCategory);
-Router.put("/:id", requireAuth, deleteCategory);
+Router.delete("/:id", requireAuth, deleteCategory);
 
 module.exports = Router;

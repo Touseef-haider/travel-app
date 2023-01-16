@@ -10,6 +10,32 @@ const mapLocationSchema = new mongoose.Schema({
   name: {
     type: String,
   },
+  location: {
+    type: String,
+  },
+  contact: {
+    type: Number,
+  },
+  desciption: {
+    type: String,
+  },
+  category: {
+    type: mongoose.Types.ObjectId,
+    ref: "category",
+  },
+  country: {
+    name: {
+      type: String,
+      default: "Pakistan",
+    },
+    province: {
+      type: mongoose.Types.ObjectId,
+      ref: "province",
+    },
+    city: {
+      type: String,
+    },
+  },
   images: [
     {
       type: String,
@@ -17,15 +43,8 @@ const mapLocationSchema = new mongoose.Schema({
   ],
   hotels: [
     {
-      name: {
-        type: String,
-      },
-      location: {
-        type: String,
-      },
-      image: {
-        type: String,
-      },
+      type: mongoose.Types.ObjectId,
+      ref: "hotel",
     },
   ],
 });
