@@ -28,7 +28,9 @@ exports.getParticularMapLocation = async (req, res, next) => {
 
 exports.getMapLocations = async (req, res, next) => {
   try {
-    const mapLocations = await MapLocation.find({}).lean();
+    const mapLocations = await MapLocation.find({})
+      .populate(["hotels", "country.province", "category"])
+      .lean();
 
     return res.status(200).json(mapLocations);
   } catch (error) {
@@ -38,7 +40,7 @@ exports.getMapLocations = async (req, res, next) => {
 
 exports.updateMapLocation = async (req, res, next) => {
   try {
-    await MapLocation.updateOne(
+    await MapLocation.findByIdAndUpdate(
       {
         _id: req.params.id,
       },
@@ -46,6 +48,18 @@ exports.updateMapLocation = async (req, res, next) => {
     );
     return res.status(200).json({
       message: "mapLocation updated",
+    });
+  } catch (error) {
+    return next(error);
+  }
+};
+exports.deleteMapLocation = async (req, res, next) => {
+  try {
+    await MapLocation.deleteOne({
+      _id: req.params.id,
+    });
+    return res.status(200).json({
+      message: "mapLocation deleted",
     });
   } catch (error) {
     return next(error);

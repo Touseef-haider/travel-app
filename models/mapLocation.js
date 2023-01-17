@@ -16,7 +16,7 @@ const mapLocationSchema = new mongoose.Schema({
   contact: {
     type: Number,
   },
-  desciption: {
+  description: {
     type: String,
   },
   category: {
