@@ -18,7 +18,9 @@ exports.getParticularMapLocation = async (req, res, next) => {
   try {
     const mapLocation = await MapLocation.findById({
       _id: req.params.id,
-    }).lean();
+    })
+      .populate(["hotels", "country.province", "category", "accessibilities"])
+      .lean();
 
     return res.status(200).json(mapLocation);
   } catch (error) {
@@ -29,7 +31,7 @@ exports.getParticularMapLocation = async (req, res, next) => {
 exports.getMapLocations = async (req, res, next) => {
   try {
     const mapLocations = await MapLocation.find({})
-      .populate(["hotels", "country.province", "category"])
+      .populate(["hotels", "country.province", "category", "accessibilities"])
       .lean();
 
     return res.status(200).json(mapLocations);

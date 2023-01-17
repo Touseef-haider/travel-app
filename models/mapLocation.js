@@ -23,6 +23,12 @@ const mapLocationSchema = new mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: "category",
   },
+  accessibilities: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "accessibility",
+    },
+  ],
   country: {
     name: {
       type: String,
