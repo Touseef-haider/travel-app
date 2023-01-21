@@ -7,6 +7,9 @@ const hotelsSchema = new mongoose.Schema({
   location: {
     type: String,
   },
+  description: {
+    type: String,
+  },
   stars: {
     type: Number,
   },

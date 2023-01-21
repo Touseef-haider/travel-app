@@ -38,6 +38,7 @@ exports.getAccessibilities = async (req, res, next) => {
 
 exports.updateAccessibility = async (req, res, next) => {
   try {
+    console.log(req.body);
     await Accessibility.updateOne(
       {
         _id: req.params.id,
