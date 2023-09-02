@@ -6,7 +6,8 @@ exports.addRating = async (req,res,next)=>{
 
         const rating  = new Rating({
             experience: req.body.experience,
-            rating: req.body.rating
+            rating: req.body.rating,
+            profile:req.user._id
         })
 
         await rating.save()
@@ -37,7 +38,7 @@ exports.getParticularRating = async (req,res,next)=>{
 
         const rating = await Rating.findById({
             _id: req.params.id
-        })
+        }).populate("profile")
 
 
         return res.status(200).json(rating)

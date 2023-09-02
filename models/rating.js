@@ -1,21 +1,24 @@
-const mongoose  =require("mongoose")
+const mongoose = require("mongoose")
 
 const ratingSchema = new mongoose.Schema({
-    rating:{
+    rating: {
         type: Number,
-        required:true
+        required: true
     },
-    experience:{
+    experience: {
         type: mongoose.Types.ObjectId,
-        ref:"experience"
+        ref: "experience"
     },
-   
-},{
-    timestamps:{
-        createdAt:"created_at",
-        updatedAt:"updated_at"
+    profile: {
+        type: mongoose.Types.ObjectId,
+        ref: "profile"
+    }
+}, {
+    timestamps: {
+        createdAt: "created_at",
+        updatedAt: "updated_at"
     }
 })
 
 
-module.exports = mongoose.model("rating",ratingSchema)
+module.exports = mongoose.model("rating", ratingSchema)
