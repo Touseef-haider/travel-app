@@ -8,8 +8,8 @@ const {
 
 const requireAuth = require("../middleware/auth");
 
-Router.get("/getOwnProfile", requireAuth, getOwnProfile);
 Router.get("/:id", requireAuth, getParticularProfile);
+Router.get("/getOwnProfile", requireAuth, getOwnProfile);
 Router.put("/:id", requireAuth, updateProfile);
 
 module.exports = Router;

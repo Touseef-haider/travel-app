@@ -16,6 +16,7 @@ const provinceRoutes = require("./appRoutes/province");
 const categoryRoutes = require("./appRoutes/category");
 const hotelRoutes = require("./appRoutes/hotel");
 const accessibilityRoutes = require("./appRoutes/accessibility");
+const ratingRoutes = require("./appRoutes/rating")
 
 // Auth Routes
 Router.post("/login", logIn);
@@ -30,6 +31,7 @@ Router.use("/mapLocation", mapLocationRoutes);
 Router.use("/category", categoryRoutes);
 Router.use("/province", provinceRoutes);
 Router.use("/hotel", hotelRoutes);
+Router.use("/rating",ratingRoutes)
 Router.use("/accessibility", accessibilityRoutes);
 
 // for storing single file
