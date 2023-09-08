@@ -13,12 +13,9 @@ exports.getParticularProfile = async (req, res, next) => {
 // for own profile
 exports.getOwnProfile = async (req, res, next) => {
   try {
-    console.log("calling");
-    console.log(req.user);
     const profile = await Profile.findById({
       _id: req.user._id,
     }).populate([{ path: "user", model: "user", select: "_id email" }]);
-    console.log(profile);
     return res.status(200).json(profile);
   } catch (error) {
     return next(error);

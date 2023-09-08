@@ -5,10 +5,12 @@ exports.addRating = async (req,res,next)=>{
     try{
 
         const rating  = new Rating({
-            experience: req.body.experience,
+            mapLocation: req.body.mapLocation,
             rating: req.body.rating,
             profile:req.user._id
         })
+
+
 
         await rating.save()
 

@@ -47,6 +47,9 @@ const mapLocationSchema = new mongoose.Schema({
       type: String,
     },
   ],
+  rating: {
+    type:Number
+  },
   hotels: [
     {
       type: mongoose.Types.ObjectId,

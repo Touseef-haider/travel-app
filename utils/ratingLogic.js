@@ -6,7 +6,7 @@ exports.getRatings = async function () {
 
 
         const ratings = await Rating.find({}).sort({
-            created_at: -1
+            rating: -1
         }).populate("profile")
 
         return ratings

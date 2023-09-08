@@ -5,9 +5,9 @@ const ratingSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    experience: {
+    mapLocation: {
         type: mongoose.Types.ObjectId,
-        ref: "experience"
+        ref: "mapLocation"
     },
     profile: {
         type: mongoose.Types.ObjectId,
