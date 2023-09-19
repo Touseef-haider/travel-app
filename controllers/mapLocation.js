@@ -33,7 +33,7 @@ exports.getMapLocations = async (req, res, next) => {
     const mapLocations = await MapLocation.find({})
       .populate(["hotels", "country.province", "category", "accessibilities"])
       .sort({
-        rating:1
+        rating:-1
       })
       .lean();
 
